@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://divareloungebeauty.com.br/sitemap.xml
