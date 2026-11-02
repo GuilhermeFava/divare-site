@@ -225,6 +225,7 @@ body{margin:0}
 .team h2{font-size:clamp(40px,4.8vw,64px);color:var(--porcelain)}
 .team .lead{margin-top:16px;color:#E9D9D2;max-width:32em}
 .roster{margin-top:30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px}
+.roster div:last-child:nth-child(odd){grid-column:1/-1}
 .roster div{padding:13px 0;border-top:1px solid rgba(251,247,244,.18);min-width:0}
 .roster dt{font:italic 400 17px/1.2 var(--serif);color:var(--dusk)}
 .roster dd{margin:3px 0 0;font:400 22px/1.25 var(--serif);color:var(--porcelain)}
@@ -525,7 +526,7 @@ footer .ai-note{color:#D9C3BA}
     <div class="wrap">
       <div class="team-photo">
         <img src="fotos/opt/96c37abdccfef8d50701b5ce12739320-800.webp" srcset="fotos/opt/96c37abdccfef8d50701b5ce12739320-480.webp 480w, fotos/opt/96c37abdccfef8d50701b5ce12739320-800.webp 800w, fotos/opt/96c37abdccfef8d50701b5ce12739320-1122.webp 1122w" sizes="(min-width:900px) 46vw, 100vw" width="1122" height="1402" alt="Cliente relaxando no lavatório durante tratamento capilar" loading="lazy" decoding="async">
-        <div class="stamp"><b>11</b>profissionais</div>
+        <div class="stamp"><b>12</b>profissionais</div>
       </div>
       <div>
         <h2 id="team-title">Quem cuida de você</h2>
@@ -534,8 +535,9 @@ footer .ai-note{color:#D9C3BA}
           <div><dt>Cabelos</dt><dd>Dinara, Jeff e Patrícia</dd></div>
           <div><dt>Unhas</dt><dd>Carol, Lisa, Millena, Raissa, Roberta e Sarah</dd></div>
           <div><dt>Estética & massagens</dt><dd>Tania e Silvia</dd></div>
-          <div><dt>Olhar, maquiagem & depilação</dt><dd>Silvia</dd></div>
-          <div><dt>Piercings</dt><dd>Millena, com hora marcada</dd></div>
+          <div><dt>Olhar</dt><dd>Eduarda e Silvia</dd></div>
+          <div><dt>Maquiagem & depilação</dt><dd>Silvia</dd></div>
+          <div><dt>Piercings</dt><dd>Millena</dd></div>
           <div><dt>Horário</dt><dd>Terça a sábado, 9h às 20h</dd></div>
         </dl>
       </div>
@@ -920,7 +922,7 @@ const CATS = [
     ['Pés e manutenção',[S('Spa dos pés','Para relaxar e renovar pele e unhas. Também com esmaltação em gel.'),S('Reconstrução de unha','Por unha, após avaliação.'),S('Remoção de alongamento ou gel','Preservando a unha natural.')]]],
    note:'A profissional indica formato, comprimento e acabamento que combinam com a sua rotina.'},
   {id:'olhar', cls:'', nm:'Olhar e lábios', sub:'Sobrancelhas, cílios, micropigmentação', img:REAL.olhar03, alt:'Olho com extensão de cílios volumosa e delineada',
-   strip:[REAL.olhar02, REAL.olhar05, IMG.labios], team:'Atendimento com Silvia.',
+   strip:[REAL.olhar02, REAL.olhar05, IMG.labios], team:'Atendimento com Eduarda e Silvia.',
    groups:[
     ['Sobrancelhas',[S('Design de sobrancelhas','Com cera, linha ou pinça, conforme avaliação e preferência.'),S('Design com henna','Realça o desenho e preenche visualmente.'),S('Coloração RefectoCil','Junto do design ou como pintura avulsa.')]],
     ['Cílios e brow',[S('Brow lamination com design','Organiza a direção dos fios.'),S('Lash design','Alongamento de cílios.'),S('Lash lifting','Curvatura e realce dos cílios naturais.'),S('Cílios postiços','Para destacar o olhar na produção.')]],
@@ -928,7 +930,7 @@ const CATS = [
     ['Lábios',[S('Hidragloss','Aspecto hidratado e luminoso.')]]],
    note:'Cada desenho começa por uma avaliação dos seus traços e da sua pele.'},
   {id:'piercings', cls:'', nm:'Piercings', sub:'Perfurações e joias em ouro 18k', img:IMG.piercing, alt:'Mulher de perfil com piercings delicados na orelha',
-   strip:[IMG.orelha, IMG.joias, IMG.nariz], team:'Atendimento com Millena, sempre com hora marcada.',
+   strip:[IMG.orelha, IMG.joias, IMG.nariz], team:'Atendimento com Millena.',
    groups:[
     ['Perfurações',[S('Nariz','1 joia de pontinho de luz incluída.'),S('Lóbulo','Do 1º ao 4º furo, com 2 joias de pontinho de luz incluídas.'),S('Cartilagem','Joia escolhida à parte.',['Daith','Flat','Hélix','Trágus','Anti-hélix','Conch','Rook']),S('Umbigo','Joia escolhida à parte.')]],
     ['Composições de orelha',[S('Australiano','Trio com 3 joias ou duplo com 2, todas de pontinho de luz.'),S('Minion','Único com 1 joia ou duplo com 2.')]],
