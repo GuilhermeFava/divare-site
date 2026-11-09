@@ -1,0 +1,11 @@
+{
+  "name": "divare-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "instagram": "node scripts/update-instagram.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "1.64.1"
+  }
+}

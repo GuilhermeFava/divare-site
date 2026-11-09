@@ -1,0 +1,77 @@
+{
+  "signature": "Dfda7hCkcDX|2026-11-07|post\nDfdIg_0mEo-|2026-11-07|post\nDfXvbPkhYck|2026-11-05|reel\nDfSRERxkbfO|2026-11-03|post\nDfP3EyizdEK|2026-11-02|reel\nDfPRqWGRwBD|2026-11-02|reel\nDe4ghPhEQ0n|2026-10-24|post\nDe2y1gSkW-N|2026-10-23|post\nDe2erENRTqk|2026-10-23|reel\nDenF0-fmPQN|2026-10-17|post\nDecvRQtxT5I|2026-10-13|reel\nDecttI7ztMV|2026-10-13|post",
+  "posts": {
+    "Dfda7hCkcDX": {
+      "one": "ig-Dfda7hCkcDX-1x.webp",
+      "two": "ig-Dfda7hCkcDX-2x.webp",
+      "width": 480,
+      "height": 640
+    },
+    "DfdIg_0mEo-": {
+      "one": "ig-DfdIg_0mEo--1x.webp",
+      "two": "ig-DfdIg_0mEo--2x.webp",
+      "width": 480,
+      "height": 640
+    },
+    "DfXvbPkhYck": {
+      "one": "ig-DfXvbPkhYck-1x.webp",
+      "two": "ig-DfXvbPkhYck-2x.webp",
+      "width": 360,
+      "height": 640
+    },
+    "DfSRERxkbfO": {
+      "one": "ig-DfSRERxkbfO-1x.webp",
+      "two": "ig-DfSRERxkbfO-2x.webp",
+      "width": 480,
+      "height": 640
+    },
+    "DfP3EyizdEK": {
+      "one": "ig-DfP3EyizdEK-1x.webp",
+      "two": "ig-DfP3EyizdEK-2x.webp",
+      "width": 360,
+      "height": 640
+    },
+    "DfPRqWGRwBD": {
+      "one": "ig-DfPRqWGRwBD-1x.webp",
+      "two": "ig-DfPRqWGRwBD-2x.webp",
+      "width": 361,
+      "height": 640
+    },
+    "De4ghPhEQ0n": {
+      "one": "ig-De4ghPhEQ0n-1x.webp",
+      "two": "ig-De4ghPhEQ0n-2x.webp",
+      "width": 480,
+      "height": 640
+    },
+    "De2y1gSkW-N": {
+      "one": "ig-De2y1gSkW-N-1x.webp",
+      "two": "ig-De2y1gSkW-N-2x.webp",
+      "width": 480,
+      "height": 480
+    },
+    "De2erENRTqk": {
+      "one": "ig-De2erENRTqk-1x.webp",
+      "two": "ig-De2erENRTqk-2x.webp",
+      "width": 360,
+      "height": 640
+    },
+    "DenF0-fmPQN": {
+      "one": "ig-DenF0-fmPQN-1x.webp",
+      "two": "ig-DenF0-fmPQN-2x.webp",
+      "width": 480,
+      "height": 480
+    },
+    "DecvRQtxT5I": {
+      "one": "ig-DecvRQtxT5I-1x.webp",
+      "two": "ig-DecvRQtxT5I-2x.webp",
+      "width": 361,
+      "height": 640
+    },
+    "DecttI7ztMV": {
+      "one": "ig-DecttI7ztMV-1x.webp",
+      "two": "ig-DecttI7ztMV-2x.webp",
+      "width": 480,
+      "height": 571
+    }
+  }
+}

@@ -282,10 +282,6 @@ thead th{font:400 22px/1.1 var(--serif);border-bottom:1px solid var(--cocoa)}
 .ig-who{display:flex;flex-direction:column;gap:2px;margin-right:auto;min-width:0}
 .ig-who h2{font-size:clamp(32px,4vw,50px)}
 .ig-who p{color:var(--mauve);font-size:15.5px}
-.ig-filters{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
-.ig-filter{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--cocoa);font:500 13.5px/1 var(--sans);letter-spacing:.02em;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-.ig-filter:hover{border-color:var(--cocoa)}
-.ig-filter[aria-pressed="true"]{background:var(--cocoa);border-color:var(--cocoa);color:var(--porcelain)}
 .ig-track-head{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .ig-track-head p{font:italic 400 19px/1.3 var(--serif);color:var(--mauve)}
 .ig-nav{display:flex;gap:8px;flex-shrink:0}
@@ -297,12 +293,13 @@ thead th{font:400 22px/1.1 var(--serif);border-bottom:1px solid var(--cocoa)}
 .ig-track::-webkit-scrollbar{height:6px}
 .ig-track::-webkit-scrollbar-track{background:transparent}
 .ig-track::-webkit-scrollbar-thumb{background:var(--dusk);border-radius:999px}
-.ig-card{flex:0 0 calc((100% - 48px)/4.5);min-width:0;margin:0;scroll-snap-align:start;transition:opacity .16s ease}
-.ig-card[hidden]{display:none}
-.ig-card.is-out{opacity:0}
-.ig-card img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--petal)}
-.ig-card figcaption{padding-top:9px;font:italic 400 18px/1.2 var(--serif);color:var(--mauve)}
-.ig-track:not([data-filter="all"]) .ig-card figcaption{visibility:hidden}
+.ig-card{display:block;flex:0 0 calc((100% - 48px)/4.5);min-width:0;margin:0;color:inherit;text-decoration:none;scroll-snap-align:start}
+.ig-media{position:relative;display:block;border-radius:4px;overflow:hidden;background:var(--petal)}
+.ig-card img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .3s ease}
+.ig-card:hover img,.ig-card:focus-visible img{transform:scale(1.02)}
+.ig-reel{position:absolute;right:8px;bottom:8px;width:26px;height:26px;border-radius:50%;background:rgb(32 20 17/.62);color:#fff;display:grid;place-items:center;pointer-events:none}
+.ig-reel svg{width:12px;height:12px;fill:currentColor}
+.ig-caption{display:block;padding-top:9px;font:italic 400 18px/1.2 var(--serif);color:var(--mauve)}
 @media(max-width:1180px){.ig-card{flex-basis:calc((100% - 36px)/3.5)}}
 @media(max-width:760px){
   .ig{padding-block:64px}
@@ -471,8 +468,8 @@ footer .ai-note{color:#D9C3BA}
             <img src="fotos/opt/1b5534f4ec915018a7ad1b533f9d7688-800.webp" srcset="fotos/opt/1b5534f4ec915018a7ad1b533f9d7688-480.webp 480w, fotos/opt/1b5534f4ec915018a7ad1b533f9d7688-800.webp 800w, fotos/opt/1b5534f4ec915018a7ad1b533f9d7688-942.webp 942w" sizes="(min-width: 900px) 520px, 340px" width="942" height="1130" alt="Mulher com corte long bob castanho iluminado, sobre fundo rosé" loading="eager" decoding="sync" fetchpriority="high">
             <div class="door" aria-hidden="true"><i class="leaf l"></i><i class="leaf r"></i></div>
           </div>
-          <img src="fotos/opt/3356bd9295c25f8bb8287cba7fe6b69f-800.webp" srcset="fotos/opt/3356bd9295c25f8bb8287cba7fe6b69f-480.webp 480w, fotos/opt/3356bd9295c25f8bb8287cba7fe6b69f-800.webp 800w, fotos/opt/3356bd9295c25f8bb8287cba7fe6b69f-1122.webp 1122w" sizes="(min-width:900px) 150px, 104px" width="1122" height="1402" alt="Profissional finalizando unhas em gel" class="orb a" loading="eager" decoding="async">
-          <img src="fotos/opt/f0df21b22140a23d99d81a20581f1302-800.webp" srcset="fotos/opt/f0df21b22140a23d99d81a20581f1302-480.webp 480w, fotos/opt/f0df21b22140a23d99d81a20581f1302-800.webp 800w, fotos/opt/f0df21b22140a23d99d81a20581f1302-1122.webp 1122w" sizes="(min-width:900px) 118px, 86px" width="1122" height="1402" alt="Aplicação de lash lifting" class="orb b" loading="eager" decoding="async">
+          <img src="fotos/reais/unhas-14-400.webp" srcset="fotos/reais/unhas-14-400.webp 400w, fotos/reais/unhas-14.webp 800w" sizes="(min-width:900px) 150px, 104px" width="800" height="1000" alt="Profissional finalizando unhas em gel" class="orb a" loading="eager" decoding="async">
+          <img src="fotos/reais/olhar-01-400.webp" srcset="fotos/reais/olhar-01-400.webp 400w, fotos/reais/olhar-01.webp 800w" sizes="(min-width:900px) 118px, 86px" width="800" height="1000" alt="Aplicação de lash lifting" class="orb b" loading="eager" decoding="async">
         </div>
         <p class="big r" aria-hidden="true">respire.</p>
       </div>
@@ -614,173 +611,94 @@ footer .ai-note{color:#D9C3BA}
         </div>
         <a class="btn btn-solid" href="https://www.instagram.com/divareloungebeauty/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>Seguir no Instagram</a>
       </div>
-      <div class="ig-filters" role="group" aria-label="Filtrar trabalhos por categoria">
-        <button type="button" class="ig-filter" data-ig-filter="all" aria-pressed="true">Todos</button>
-        <button type="button" class="ig-filter" data-ig-filter="cabelos" aria-pressed="false">Cabelos</button>
-        <button type="button" class="ig-filter" data-ig-filter="unhas" aria-pressed="false">Unhas</button>
-        <button type="button" class="ig-filter" data-ig-filter="olhar" aria-pressed="false">Olhar</button>
-      </div>
+      <!-- instagram:start -->
       <div class="ig-track-head">
-        <p>Fotos reais de clientes do salão.</p>
+        <p>Últimas publicações do Instagram.</p>
         <div class="ig-nav">
-          <button type="button" data-ig-prev aria-label="Fotos anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button>
-          <button type="button" data-ig-next aria-label="Próximas fotos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button>
+          <button type="button" data-ig-prev aria-label="Publicações anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg></button>
+          <button type="button" data-ig-next aria-label="Próximas publicações"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg></button>
         </div>
       </div>
-      <div class="ig-track" id="ig-track" data-filter="all" tabindex="0" role="region" aria-label="Trabalhos reais do salão">
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-01.webp" srcset="fotos/reais/unhas-01-400.webp 400w, fotos/reais/unhas-01.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas quadradas vermelho-vinho" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-01.webp" srcset="fotos/reais/cabelos-01-400.webp 400w, fotos/reais/cabelos-01.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro com mechas e ondas soltas, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-02.webp" srcset="fotos/reais/unhas-02-400.webp 400w, fotos/reais/unhas-02.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas quadradas vermelho vivo" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-02.webp" srcset="fotos/reais/cabelos-02-400.webp 400w, fotos/reais/cabelos-02.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro iluminado com ondas, visto de costas no salão" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-01.webp" srcset="fotos/reais/olhar-01-400.webp 400w, fotos/reais/olhar-01.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho com extensão de cílios volumosa" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-03.webp" srcset="fotos/reais/unhas-03-400.webp 400w, fotos/reais/unhas-03.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha azul com glitter em formato amendoado" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-04.webp" srcset="fotos/reais/unhas-04-400.webp 400w, fotos/reais/unhas-04.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas claras em formato amendoado, mão sobre revista" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-03.webp" srcset="fotos/reais/cabelos-03-400.webp 400w, fotos/reais/cabelos-03.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro dourado com ondas volumosas, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-05.webp" srcset="fotos/reais/unhas-05-400.webp 400w, fotos/reais/unhas-05.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas brancas longas em formato amendoado" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-04.webp" srcset="fotos/reais/cabelos-04-400.webp 400w, fotos/reais/cabelos-04.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo longo com raiz escura e ondas castanhas, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-06.webp" srcset="fotos/reais/unhas-06-400.webp 400w, fotos/reais/unhas-06.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas claras em formato amendoado sobre revista" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-07.webp" srcset="fotos/reais/unhas-07-400.webp 400w, fotos/reais/unhas-07.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha branca com glitter em formato stiletto" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-05.webp" srcset="fotos/reais/cabelos-05-400.webp 400w, fotos/reais/cabelos-05.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo longo caramelo com ondas, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-02.webp" srcset="fotos/reais/olhar-02-400.webp 400w, fotos/reais/olhar-02.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho com extensão de cílios longa" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-08.webp" srcset="fotos/reais/unhas-08-400.webp 400w, fotos/reais/unhas-08.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas brancas em formato stiletto" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-09.webp" srcset="fotos/reais/unhas-09-400.webp 400w, fotos/reais/unhas-09.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas nude longas em formato stiletto" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-06.webp" srcset="fotos/reais/cabelos-06-400.webp 400w, fotos/reais/cabelos-06.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro liso e longo, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-10.webp" srcset="fotos/reais/unhas-10-400.webp 400w, fotos/reais/unhas-10.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas pretas em formato stiletto com detalhe dourado" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-07.webp" srcset="fotos/reais/cabelos-07-400.webp 400w, fotos/reais/cabelos-07.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro claro liso com pontas viradas, visto de lado" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-11.webp" srcset="fotos/reais/unhas-11-400.webp 400w, fotos/reais/unhas-11.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha do pé vermelho escuro com brilho" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-12.webp" srcset="fotos/reais/unhas-12-400.webp 400w, fotos/reais/unhas-12.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas quadradas marrom com acabamento glossy" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-08.webp" srcset="fotos/reais/cabelos-08-400.webp 400w, fotos/reais/cabelos-08.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro em camadas com movimento, visto de lado" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-03.webp" srcset="fotos/reais/olhar-03-400.webp 400w, fotos/reais/olhar-03.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho com extensão de cílios volumosa e delineada" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-13.webp" srcset="fotos/reais/unhas-13-400.webp 400w, fotos/reais/unhas-13.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Nail art colorida com adesivos e pedras" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-09.webp" srcset="fotos/reais/cabelos-09-400.webp 400w, fotos/reais/cabelos-09.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Penteado preso com trança e laço escuro, visto de costas" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-14.webp" srcset="fotos/reais/unhas-14-400.webp 400w, fotos/reais/unhas-14.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha branca sendo pintada com pincel" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-04.webp" srcset="fotos/reais/olhar-04-400.webp 400w, fotos/reais/olhar-04.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho claro com alongamento de cílios em efeito natural" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-16.webp" srcset="fotos/reais/unhas-16-400.webp 400w, fotos/reais/unhas-16.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas nude com francesinha sobre revista" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="cabelos">
-          <img src="fotos/reais/cabelos-10.webp" srcset="fotos/reais/cabelos-10-400.webp 400w, fotos/reais/cabelos-10.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Cabelo loiro acinzentado em camadas, visto de lado" loading="lazy" decoding="async">
-          <figcaption>Cabelos</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-05.webp" srcset="fotos/reais/olhar-05-400.webp 400w, fotos/reais/olhar-05.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho castanho com alongamento de cílios volumoso e sobrancelha desenhada" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-17.webp" srcset="fotos/reais/unhas-17-400.webp 400w, fotos/reais/unhas-17.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas curtas pretas com anel prateado" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-18.webp" srcset="fotos/reais/unhas-18-400.webp 400w, fotos/reais/unhas-18.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas escuras com nail art colorida feita à mão" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-06.webp" srcset="fotos/reais/olhar-06-400.webp 400w, fotos/reais/olhar-06.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho verde com alongamento de cílios volumoso" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-19.webp" srcset="fotos/reais/unhas-19-400.webp 400w, fotos/reais/unhas-19.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha amendoada com nail art de estrela e bolinhas" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-20.webp" srcset="fotos/reais/unhas-20-400.webp 400w, fotos/reais/unhas-20.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unha com glitter e ponta azul com estrela amarela" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="olhar">
-          <img src="fotos/reais/olhar-07.webp" srcset="fotos/reais/olhar-07-400.webp 400w, fotos/reais/olhar-07.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Olho claro com alongamento de cílios longo e marcado" loading="lazy" decoding="async">
-          <figcaption>Olhar</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-21.webp" srcset="fotos/reais/unhas-21-400.webp 400w, fotos/reais/unhas-21.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Unhas dos pés em pink com brilho" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
-        <figure class="ig-card" data-cat="unhas">
-          <img src="fotos/reais/unhas-22.webp" srcset="fotos/reais/unhas-22-400.webp 400w, fotos/reais/unhas-22.webp 800w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="800" height="1000" alt="Francesinha com detalhe rosa em unhas amendoadas" loading="lazy" decoding="async">
-          <figcaption>Unhas</figcaption>
-        </figure>
+      <div class="ig-track" id="ig-track" tabindex="0" role="region" aria-label="Últimas publicações do Instagram">
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/Dfda7hCkcDX/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-Dfda7hCkcDX-2x.webp" srcset="fotos/instagram/ig-Dfda7hCkcDX-1x.webp 240w, fotos/instagram/ig-Dfda7hCkcDX-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="640" alt="Penteado com trança lateral e rabo de cavalo alto em cabelo loiro, visto de costas." loading="eager" decoding="async">
+          </span>
+          <span class="ig-caption">7 nov · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/DfdIg_0mEo-/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DfdIg_0mEo--2x.webp" srcset="fotos/instagram/ig-DfdIg_0mEo--1x.webp 240w, fotos/instagram/ig-DfdIg_0mEo--2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="640" alt="Rabo de cavalo alto com ondas soltas em cabelo loiro, visto de costas." loading="eager" decoding="async">
+          </span>
+          <span class="ig-caption">7 nov · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/divareloungebeauty/reel/DfXvbPkhYck/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DfXvbPkhYck-2x.webp" srcset="fotos/instagram/ig-DfXvbPkhYck-1x.webp 240w, fotos/instagram/ig-DfXvbPkhYck-2x.webp 360w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="360" height="640" alt="Profissional de máscara atendendo cliente em maca no salão." loading="eager" decoding="async">
+            <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span>
+          </span>
+          <span class="ig-caption">5 nov · Reel</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/DfSRERxkbfO/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DfSRERxkbfO-2x.webp" srcset="fotos/instagram/ig-DfSRERxkbfO-1x.webp 240w, fotos/instagram/ig-DfSRERxkbfO-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="640" alt="Penteado preso baixo com trança e ondas em cabelo acobreado, visto de costas." loading="lazy" decoding="async">
+          </span>
+          <span class="ig-caption">3 nov · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/reel/DfP3EyizdEK/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DfP3EyizdEK-2x.webp" srcset="fotos/instagram/ig-DfP3EyizdEK-1x.webp 240w, fotos/instagram/ig-DfP3EyizdEK-2x.webp 360w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="360" height="640" alt="Cliente e profissional sorrindo em selfie no salão, com celular na frente do espelho." loading="lazy" decoding="async">
+            <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span>
+          </span>
+          <span class="ig-caption">2 nov · Reel</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/reel/DfPRqWGRwBD/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DfPRqWGRwBD-2x.webp" srcset="fotos/instagram/ig-DfPRqWGRwBD-1x.webp 240w, fotos/instagram/ig-DfPRqWGRwBD-2x.webp 361w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="361" height="640" alt="Profissional em pé no salão, de frente para a câmera, com o polegar erguido." loading="lazy" decoding="async">
+            <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span>
+          </span>
+          <span class="ig-caption">2 nov · Reel</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/De4ghPhEQ0n/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-De4ghPhEQ0n-2x.webp" srcset="fotos/instagram/ig-De4ghPhEQ0n-1x.webp 240w, fotos/instagram/ig-De4ghPhEQ0n-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="640" alt="Cliente de perfil com cabelo longo iluminado, em pé no salão." loading="lazy" decoding="async">
+          </span>
+          <span class="ig-caption">24 out · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/De2y1gSkW-N/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-De2y1gSkW-N-2x.webp" srcset="fotos/instagram/ig-De2y1gSkW-N-1x.webp 240w, fotos/instagram/ig-De2y1gSkW-N-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="480" alt="Cliente de frente, sorrindo, com cabelo em ondas iluminadas." loading="lazy" decoding="async">
+          </span>
+          <span class="ig-caption">23 out · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/abetanails/reel/De2erENRTqk/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-De2erENRTqk-2x.webp" srcset="fotos/instagram/ig-De2erENRTqk-1x.webp 240w, fotos/instagram/ig-De2erENRTqk-2x.webp 360w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="360" height="640" alt="Unhas amendoadas com nail art dourada marmorizada." loading="lazy" decoding="async">
+            <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span>
+          </span>
+          <span class="ig-caption">23 out · Reel</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/bahpaty/p/DenF0-fmPQN/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DenF0-fmPQN-2x.webp" srcset="fotos/instagram/ig-DenF0-fmPQN-1x.webp 240w, fotos/instagram/ig-DenF0-fmPQN-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="480" alt="Cliente de frente com cabelo preso e maquiagem, no salão." loading="lazy" decoding="async">
+          </span>
+          <span class="ig-caption">17 out · Post</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/abetanails/reel/DecvRQtxT5I/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DecvRQtxT5I-2x.webp" srcset="fotos/instagram/ig-DecvRQtxT5I-1x.webp 240w, fotos/instagram/ig-DecvRQtxT5I-2x.webp 361w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="361" height="640" alt="Onça-pintada em fundo escuro, capa do reel de nail art." loading="lazy" decoding="async">
+            <span class="ig-reel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span>
+          </span>
+          <span class="ig-caption">13 out · Reel</span>
+        </a>
+        <a class="ig-card" href="https://www.instagram.com/lash_eduardagovoni/p/DecttI7ztMV/" target="_blank" rel="noopener">
+          <span class="ig-media">
+            <img src="fotos/instagram/ig-DecttI7ztMV-2x.webp" srcset="fotos/instagram/ig-DecttI7ztMV-1x.webp 240w, fotos/instagram/ig-DecttI7ztMV-2x.webp 480w" sizes="(min-width:1181px) 249px, (min-width:761px) 31vw, 268px" width="480" height="571" alt="Homem deitado com olhos fechados, em atendimento de cílios e sobrancelhas." loading="lazy" decoding="async">
+          </span>
+          <span class="ig-caption">13 out · Post</span>
+        </a>
       </div>
+      <!-- instagram:end -->
     </div>
   </section>
 
@@ -1022,15 +940,12 @@ drawer.addEventListener('close', () => { if (lastBtn) lastBtn.focus(); });
 const h = (location.hash || '').slice(1);
 if (CATS.some(c => c.id === h)) { document.getElementById('servicos').scrollIntoView(); openCat(h); }
 const igTrack = document.getElementById('ig-track');
-const igFilters = Array.from(document.querySelectorAll('[data-ig-filter]'));
-const igCards = Array.from(igTrack.querySelectorAll('.ig-card'));
 const igPrev = document.querySelector('[data-ig-prev]');
 const igNext = document.querySelector('[data-ig-next]');
 const igReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-let igTimer = 0;
 
 function igStep(){
-  const card = igCards.find(c => !c.hidden) || igCards[0];
+  const card = igTrack.querySelector('.ig-card');
   const gap = parseFloat(getComputedStyle(igTrack).gap) || 12;
   return card ? card.getBoundingClientRect().width + gap : 0;
 }
@@ -1039,28 +954,6 @@ function igNav(){
   igPrev.disabled = igTrack.scrollLeft <= 1;
   igNext.disabled = igTrack.scrollLeft >= max;
 }
-function igFilter(filter){
-  igFilters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.igFilter === filter)));
-  igTrack.dataset.filter = filter;
-  window.clearTimeout(igTimer);
-  const show = card => filter === 'all' || card.dataset.cat === filter;
-  if (igReduce.matches) {
-    igCards.forEach(card => { card.hidden = !show(card); card.classList.remove('is-out'); });
-    igTrack.scrollLeft = 0;
-    igNav();
-    return;
-  }
-  igCards.forEach(card => card.classList.add('is-out'));
-  igTimer = window.setTimeout(() => {
-    igCards.forEach(card => { card.hidden = !show(card); });
-    igTrack.scrollLeft = 0;
-    window.requestAnimationFrame(() => {
-      igCards.forEach(card => { if (!card.hidden) card.classList.remove('is-out'); });
-      igNav();
-    });
-  }, 150);
-}
-igFilters.forEach(btn => btn.addEventListener('click', () => igFilter(btn.dataset.igFilter)));
 igPrev.addEventListener('click', () => igTrack.scrollBy({ left: -igStep(), behavior: igReduce.matches ? 'auto' : 'smooth' }));
 igNext.addEventListener('click', () => igTrack.scrollBy({ left: igStep(), behavior: igReduce.matches ? 'auto' : 'smooth' }));
 igTrack.addEventListener('scroll', igNav, { passive: true });
