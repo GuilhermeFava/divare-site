@@ -171,8 +171,18 @@ function viewNew() {
 
   const touch = () => { st.req = null; err.textContent = ""; };
   const ready = () => st.name.trim().split(/\s+/).filter(Boolean).length >= 2 && st.cpf.length === 11 && st.cents >= 10000 && !!st.date && !st.busy;
+  const need = h("p", { id: "falta-msg", class: "hint need", "aria-live": "polite" });
+  const missing = () => {
+    if (st.busy || !(st.name.trim() || st.cpf || st.cents)) return "";
+    if (st.name.trim().split(/\s+/).filter(Boolean).length < 2) return "Para liberar o botão, digite o nome e o sobrenome da cliente.";
+    if (st.cpf.length !== 11) return "Para liberar o botão, complete o CPF.";
+    if (!st.date) return "Para liberar o botão, confira a data do atendimento.";
+    if (st.cents < 10000) return "Para liberar o botão, informe um valor a partir de R$ 100.";
+    return "";
+  };
   const refresh = () => {
     btn.disabled = !ready();
+    need.textContent = missing();
     const n = spinsFor(st.cents);
     dots.querySelectorAll("span").forEach((s, i) => s.classList.toggle("on", i < n));
     if (st.cents === 0) spinsMsg.textContent = "A partir de R$ 100";
@@ -245,7 +255,7 @@ function viewNew() {
     openBox,
     h("div", { class: "field" }, h("label", { for: "valor" }, "Valor total pago"), amount),
     h("div", { class: "spins" }, dots, spinsMsg),
-    err, btn);
+    err, need, btn);
 
   const aside = h("aside", { class: "aside-card" },
     h("div", { class: "aside-arch", "aria-hidden": "true" }),
