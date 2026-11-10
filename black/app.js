@@ -34,8 +34,8 @@ const MESSAGES = {
   invalid_name: "Informe o nome completo da cliente.",
   invalid_cpf: "CPF inválido. Confira os números.",
   below_minimum: "O atendimento precisa ter, no mínimo, R$ 100 para gerar giros.",
-  invalid_date: "Data inválida. Use uma data de 11/11/2026 até hoje.",
-  outside_campaign: "A campanha vai de 11/11 a 30/11. Fora desse período não dá para registrar nem girar.",
+  invalid_date: "Data inválida. Confira o dia, o mês e o período da campanha.",
+  outside_campaign: "Hoje está fora do período da campanha. Não dá para registrar nem girar.",
   duplicate_visit: "Este atendimento já foi registrado com este CPF, nesta data e com este valor.",
   visit_not_found: "Não encontramos este atendimento.",
   visit_voided: "Este atendimento foi anulado.",
@@ -418,12 +418,12 @@ function viewPrizes() {
 
 /* ------------------------------------------------------------ administração */
 function viewAdmin() {
-  const tabs = [["resumo", "Resumo"], ["historico", "Histórico"], ["premios", "Prêmios"]];
+  const tabs = [["resumo", "Resumo"], ["historico", "Histórico"], ["premios", "Prêmios"], ["campanha", "Campanha"]];
   let cur = (location.hash.split("/")[2]) || "resumo";
   if (!tabs.some(t => t[0] === cur)) cur = "resumo";
   const body = h("div", { class: "admin-body" });
   const tabBar = h("div", { class: "subtabs", role: "tablist" }, tabs.map(([k, l]) => h("a", { href: "#/admin/" + k, role: "tab", "aria-selected": k === cur ? "true" : "false", class: "subtab" }, l)));
-  ({ resumo: adminSummary, historico: adminHistory, premios: adminPrizes })[cur](body);
+  ({ resumo: adminSummary, historico: adminHistory, premios: adminPrizes, campanha: adminCampaign })[cur](body);
   return h("section", { class: "shell" },
     h("header", { class: "page-head" }, h("p", { class: "eyebrow" }, "Administração"), h("h1", null, "Campanha Black Friday")),
     tabBar, body);
@@ -555,6 +555,57 @@ function adminPrizes(body) {
     dlg.replaceChildren(form); dlg.onclose = null; dlg.returnValue = ""; dlg.showModal(); f.name.focus();
   }
   load();
+}
+
+function adminCampaign(body) {
+  const mask = (d) => d.slice(0, 8).replace(/^(\d{2})(\d)/, "$1/$2").replace(/^(\d{2})\/(\d{2})(\d)/, "$1/$2/$3");
+  const toIso = (v) => {
+    const d = digits(v); if (d.length !== 8) return null;
+    const dd = +d.slice(0, 2), mm = +d.slice(2, 4), yy = +d.slice(4, 8);
+    const t = new Date(Date.UTC(yy, mm - 1, dd));
+    if (yy < 2000 || t.getUTCFullYear() !== yy || t.getUTCMonth() !== mm - 1 || t.getUTCDate() !== dd) return null;
+    return `${d.slice(4, 8)}-${d.slice(2, 4)}-${d.slice(0, 2)}`;
+  };
+  const mk = (id, iso) => {
+    const i = h("input", { id, type: "text", inputmode: "numeric", autocomplete: "off", placeholder: "dd/mm/aaaa", maxlength: "10", value: fmtDate(iso) });
+    i.addEventListener("input", () => { i.value = mask(digits(i.value)); check(); });
+    return i;
+  };
+  const start = mk("cp-inicio", S.me.campaign.starts_on), end = mk("cp-fim", S.me.campaign.ends_on);
+  const status = h("p", { class: "pz-preview", "aria-live": "polite" });
+  const err = h("p", { class: "field-error", role: "alert" });
+  const btn = h("button", { type: "submit", class: "btn btn-solid" }, "Salvar datas");
+  const paint = (c) => status.replaceChildren(
+    h("b", null, c.active ? "Campanha aberta hoje" : "Campanha fechada hoje"),
+    h("span", null, `Hoje é ${fmtDate(c.today)}. A recepção registra e gira de ${fmtDate(c.starts_on)} a ${fmtDate(c.ends_on)}.`));
+  function check() {
+    const s = toIso(start.value), e = toIso(end.value);
+    const full = digits(start.value).length === 8 && digits(end.value).length === 8;
+    err.textContent = !full ? "" : (!s || !e) ? "Esta data não existe. Confira o dia e o mês." : e < s ? "O fim não pode ser antes do início." : "";
+    btn.disabled = !(s && e && e >= s);
+    return btn.disabled ? null : [s, e];
+  }
+  const form = h("form", { class: "card cp-form", novalidate: true, onsubmit: async (ev) => {
+    ev.preventDefault();
+    const v = check(); if (!v) return;
+    btn.disabled = true; err.textContent = "";
+    try {
+      const c = await api.adminSaveCampaign(v[0], v[1]);
+      S.me.campaign = c; paint(c); announce("Datas da campanha salvas.");
+      btn.textContent = "Datas salvas";
+      setTimeout(() => { btn.textContent = "Salvar datas"; }, 2500);
+    } catch (ex) { err.textContent = msg(ex); }
+    btn.disabled = false;
+  } },
+    h("h2", null, "Período da campanha"),
+    h("p", { class: "muted" }, "Só dentro deste período a recepção consegue registrar atendimentos e girar a roleta. Prêmios já sorteados continuam valendo."),
+    h("div", { class: "grid2" },
+      h("div", { class: "field" }, h("label", { for: "cp-inicio" }, "Início"), start),
+      h("div", { class: "field" }, h("label", { for: "cp-fim" }, "Fim"), end)),
+    status, err,
+    h("div", { class: "cp-actions" }, btn));
+  paint(S.me.campaign); check();
+  body.replaceChildren(form);
 }
 
 /* ------------------------------------------------------------------ rotas */

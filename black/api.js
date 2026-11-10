@@ -76,13 +76,14 @@ const realApi = {
   adminVisits: (search, limit, offset) => rpc("bf_admin_visits", { p_search: search, p_limit: limit, p_offset: offset }),
   adminPrizes: () => rpc("bf_admin_prizes"),
   adminSavePrize: (prize) => rpc("bf_admin_save_prize", { p_prize: prize }),
+  adminSaveCampaign: (startsOn, endsOn) => rpc("bf_admin_save_campaign", { p_starts_on: startsOn, p_ends_on: endsOn }),
   adminVoidVisit: (visitId, reason) => rpc("bf_admin_void_visit", { p_visit_id: visitId, p_reason: reason }),
   adminUnredeem: (resultId, reason) => rpc("bf_admin_unredeem", { p_result_id: resultId, p_reason: reason })
 };
 
 /* ------------------------------------------------------------ simulada */
 const TODAY = "2026-11-14";
-const STARTS = "2026-11-11", ENDS = "2026-11-30";
+let STARTS = "2026-11-11", ENDS = "2026-11-30";
 const USERS = {
   "staff@divare.test": { password: "divare123", name: "Camila (recepção)", role: "staff" },
   "admin@divare.test": { password: "divare123", name: "Renata (administração)", role: "admin" }
@@ -128,6 +129,7 @@ function loadDb() {
   if (db) return db;
   try { db = JSON.parse(sessionStorage.getItem(SKEY)); } catch (e) { db = null; }
   if (!db) db = freshDb();
+  if (db.campaign) { STARTS = db.campaign.starts_on; ENDS = db.campaign.ends_on; }
   try { user = JSON.parse(sessionStorage.getItem(UKEY)); } catch (e) { user = null; }
   return db;
 }
@@ -316,6 +318,12 @@ const mockApi = {
     v.voided_at = nowIso(); v.void_reason = String(reason).trim();
     db.audit.push({ at: nowIso(), by: user.name, action: "void_visit", target: visitId, reason }); save();
     return visitView(v);
+  },
+  async adminSaveCampaign(startsOn, endsOn) {
+    await guard("admin");
+    if (!startsOn || !endsOn || endsOn < startsOn) throw new ApiError("invalid_date");
+    STARTS = startsOn; ENDS = endsOn; db.campaign = { starts_on: STARTS, ends_on: ENDS }; save();
+    return { starts_on: STARTS, ends_on: ENDS, today: TODAY, active: inCampaign() };
   },
   async adminUnredeem(resultId, reason) {
     await guard("admin");
